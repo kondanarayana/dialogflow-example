@@ -32,7 +32,7 @@ restService.post("/echo", function(req, res) {
         }
       }
     ],
-    source: "webhook-echo-sample"
+    source: JSON.stringify(req.body)
   });
 });
 
