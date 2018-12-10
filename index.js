@@ -18,10 +18,10 @@ var speech = "";
 restService.post("/echo", function(req, res) {
   console.log("req", req);
   if(req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters['echoText']){
-    if(req.body.queryResult.parameters['echoText'] =="hi"){
-      speech = req.body.queryResult.fulfillmentText + "from defined msg";
+    if(req.body.queryResult.action && req.body.queryResult.action=="input.welcome"){
+      speech = req.body.queryResult.fulfillmentText + " from user defined msg";
     }else{
-        speech = req.body.queryResult.fulfillmentText + "from custom echo msg";
+        speech = req.body.queryResult.parameters['echoText'] + " from custom echo msg";
     }
   }else{
    speech = "Seems like some problem. Speak again."
