@@ -13,14 +13,15 @@ restService.use(
 
 restService.use(bodyParser.json());
 
+restService.use(bodyParser.json());
+var speech = "";
 restService.post("/echo", function(req, res) {
   console.log("req", req);
-  var speech = "";
-  if(req.body.queryResult &&
-    req.body.queryResult.parameters &&
-    req.body.queryResult.parameters['echoText']){
+  if(req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters['echoText']){
     if(req.body.queryResult.parameters['echoText'] =="hi"){
-      speech =req.body.queryResult.parameters['fulfillmentText'] + "from defined msg";
+      speech = req.body.queryResult.parameters['fulfillmentText'] + "from defined msg";
+    }else{
+        speech = req.body.queryResult.parameters['fulfillmentText'] + "from custom echo msg";
     }
   }else{
    speech = "Seems like some problem. Speak again."
@@ -31,7 +32,7 @@ restService.post("/echo", function(req, res) {
       {
         "text": {
           "text": [
-            speech + "from custom echo msg";
+            speech 
           ]
         }
       }
@@ -39,6 +40,7 @@ restService.post("/echo", function(req, res) {
     source: JSON.stringify(req.body)
   });
 });
+
 
 restService.post("/audio", function(req, res) {
   var speech = "";
