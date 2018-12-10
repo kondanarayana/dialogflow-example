@@ -15,19 +15,23 @@ restService.use(bodyParser.json());
 
 restService.post("/echo", function(req, res) {
   console.log("req", req);
-  var speech =
-    req.body.queryResult &&
+  var speech = "";
+  if(req.body.queryResult &&
     req.body.queryResult.parameters &&
-    req.body.queryResult.parameters['echoText']
-      ? req.body.queryResult.parameters['echoText']
-      : "Seems like some problem. Speak again.";
+    req.body.queryResult.parameters['echoText']){
+    if(req.body.queryResult.parameters['echoText'] =="hi"){
+      speech =req.body.queryResult.parameters['fulfillmentText'] + "from defined msg";
+    }
+  }else{
+   speech = "Seems like some problem. Speak again."
+  }
   return res.json({
     fulfillmentText: speech,
     "fulfillmentMessages": [
       {
         "text": {
           "text": [
-            speech
+            speech + "from custom echo msg";
           ]
         }
       }
