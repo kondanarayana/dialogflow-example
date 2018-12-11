@@ -37,7 +37,7 @@ restService.post("/echo", function(req, res) {
         }
       }
     ],
-    source: JSON.stringify(req.body)
+    source: JSON.stringify(req.body.result.parameters.echoText)
   });
 });
 
