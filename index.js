@@ -19,9 +19,9 @@ restService.post("/echo", function(req, res) {
   console.log("req", req);
   if(req.body.result &&req.body.result.parameters && req.body.result.parameters.echoText){
     if(req.body.result.action && req.body.result.action=="input.welcome"){
-      speech = req.body.result.fulfillment.speech + " from user defined msg";
+      speech = req.body.result.parameters.echoText + " from user defined msg";
     }else{
-        speech = req.body.result.fulfillment.speech + " from custom echo msg";
+        speech = req.body.result.parameters.echoText + " from custom echo msg";
     }
   }else{
    speech = "Seems like some problem. Speak again."
