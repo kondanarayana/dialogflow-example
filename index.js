@@ -34,6 +34,19 @@ restService.post("/echo", function(req, res) {
 });
 
 
+   restService.post("/tdbank", function(req, res) {
+        if(req.body.result &&req.body.result.fulfillment && req.body.result.parameters.fulfillment.speech){
+            speech = req.body.queryResult.fulfillmentText.speech + " from custom message";
+        }else{
+         speech = "Seems like some problem. Can you ask different way"
+        }
+        return res.json({
+            speech: speech,
+            displayText: speech,
+            source: JSON.stringify(req.body)
+          });
+      });
+
 restService.post("/versionTwo", function(req, res) {
         if(req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters['echoText']){
           if(req.body.queryResult.parameters['echoText'] =="hi"){
