@@ -35,8 +35,8 @@ restService.post("/echo", function(req, res) {
 
 
    restService.post("/tdbank", function(req, res) {
-        if(req.body.result &&req.body.result.fulfillment && req.body.result.parameters.fulfillment.speech){
-            speech = req.body.queryResult.fulfillmentText.speech + " from custom message";
+        if(req.body.result &&req.body.result.fulfillment && req.body.result.fulfillment.speech){
+            speech = req.body.result.fulfillment.speech + " from custom message";
         }else{
          speech = "Seems like some problem. Can you ask different way"
         }
