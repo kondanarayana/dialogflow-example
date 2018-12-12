@@ -34,6 +34,32 @@ restService.post("/echo", function(req, res) {
 });
 
 
+   restService.post("/v2", function(req, res) {
+        if(req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters['echoText']){
+          if(req.body.queryResult.parameters['echoText'] =="hi"){
+            speech = req.body.queryResult.fulfillmentText' + "from defined msg";
+          }else{
+              speech = req.body.queryResult.fulfillmentText + "from custom echo msg";
+          }
+        }else{
+         speech = "Seems like some problem. Speak again."
+        }
+        return res.json({
+          fulfillmentText: speech,
+          "fulfillmentMessages": [
+            {
+              "text": {
+                "text": [
+                  speech 
+                ]
+              }
+            }
+          ],
+          source: JSON.stringify(req.body)
+        });
+      });
+
+
 restService.post("/audio", function(req, res) {
   var speech = "";
   switch (req.body.result.parameters.AudioSample.toLowerCase()) {
